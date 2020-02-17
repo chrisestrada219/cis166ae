@@ -10,14 +10,13 @@
 	// It will receive: title, name, email, response, comments, and submit in $_POST.
 	
 	$title = $_POST['title'];
-	$first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
+	$name = $_POST['name'];
 	$response = $_POST['response'];
 	$comments = $_POST['comments'];
 	
-	print "<p>Thank you, $title $first_name $last_name, for your comments.</p>
+	print "<p>Thank you, $title $name, for your comments.</p>
 			<p>You stated that you found this example to be '$response' and 
-			added:<br>$comments</p>";
+			added:<br>$commments</p>";
 ?>
 </body>
 </html>
