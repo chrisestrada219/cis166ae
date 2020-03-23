@@ -21,10 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] ==
 				($_POST['password'] == 
 				'testpass') ) { // Correct!
 				
-				print '<p class="text--
-					success">You are logged 
-					in!<br>Now you can blah,
-					blah, blah...</p>';
+				ob_end_clean();
+				header('Location: welcome.php');
+				exit();
 					
 			} else { // Incorrect!
 			
