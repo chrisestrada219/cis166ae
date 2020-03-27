@@ -42,10 +42,10 @@ if (isset($msg)) {
 	<select name="font_color">
 	<option value="">Font Color</option>
 	<option value="999">Gray</option>
-	<option value="0co">Green</option>
-	<option value="oof">Blue</option>
-	<option value="coo">Red</option>
-	<option value="ooo">Black</option>
+	<option value="0c0">Green</option>
+	<option value="00f">Blue</option>
+	<option value="c00">Red</option>
+	<option value="000">Black</option>
 	</select>
 	<input type="submit" name="submit"
 		value="Set My Preferences">
