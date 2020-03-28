@@ -4,9 +4,11 @@ if (isset($_POST['font_size'],
 	$_POST['font_color'])) {
 	
 		setcookie('font_size',
-			$_POST['font_size']);
+			$_POST['font_size'], 
+			time()+10000000, '/php');
 		setcookie('font_color',
-			$_POST['font_color']);
+			$_POST['font_color'],
+			time()+10000000, '/php');
 			
 		$msg = '<p>Your settings have 
 			been entered! Now see them 
@@ -15,7 +17,7 @@ if (isset($_POST['font_size'],
 		
 		} // End of submitted IF.
 ?>
-
+    
 <!doctype html>
 <html lang="en">
 <head>
