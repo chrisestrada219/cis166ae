@@ -21,8 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] ==
 				($_POST['password'] == 
 				'testpass') ) { // Correct!
 				
+				session_start();
+				$_SESSION['email'] = 
+					$_POST['email'];
+				$_SESSION['loggedin'] = time();
+				
 				ob_end_clean();
-				header('Location: welcome.php');
+				header('Location: welcome2.php');
 				exit();
 					
 			} else { // Incorrect!
