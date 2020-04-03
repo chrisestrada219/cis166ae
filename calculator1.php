@@ -8,11 +8,16 @@
 
 <?php // Script 10.4 - calculator1.php
 
+$tax = 8.75;
+
 function calculate_total
 	($quantity, $price) {
-		$total = $quantity * $price;
-		$total = number_format
-			($total, 2);
+		global $tax;
+		$total = $quantity * $price; 
+		// Calculation
+		$taxrate = ($tax / 100) + 1;
+		$total = $total * $taxrate; // Add the tax.
+		$total = number_format ($total, 2);
 		return $total;
 	}
 
@@ -24,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] ==
 		['quantity'], $_POST['price']);
 	print "<p>Your total comes to $<span 
 	style=\"font-weight: bold;\">$total
-	</span>.</p>";
+	</span>, including the $tax percent 
+	tax rate.</p>";
 	} else {
 		print '<p style="color: red;">
 		Please enter a valid quantity and 
