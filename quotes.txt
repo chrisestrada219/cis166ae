@@ -1,0 +1,5 @@
+Empty your mind, be formless, shapeless — like water. Now you put water in a cup, it becomes the cup; You put water 
+into a bottle it becomes the bottle; You put it in a teapot it becomes the teapot. Now water can flow or it can crash. 
+Be water, my friend.
+I had to change the relative path to pull the quotes.txt file from the same directory as the add_quote.php file. 
+I had to change the relative path to pull the quotes.txt file from the same directory as the add_quote.php file. 
