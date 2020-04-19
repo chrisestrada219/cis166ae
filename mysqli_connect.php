@@ -8,8 +8,7 @@
 
 <?php // Script 12.1 - mysqli_connect.php
 
-if ($dbc = @mysqli_ connect('localhost', 
-		'username', 'password', 'myblog')) {
+if ($dbc = @mysqli_connect('localhost', 'myblog')) {
 		
 	print '<p>Successfully connected to 
 		the database!</p>';
@@ -19,7 +18,7 @@ if ($dbc = @mysqli_ connect('localhost',
 } else {
 
 	print '<p style="color:red;">Could not 
-		connect to MySQL:<br>' . '.</p>';
+		connect to MySQL:<br>' . mysqli_connect_error() . '.</p>';
 		
 	} 
 
