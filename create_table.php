@@ -8,17 +8,15 @@
 
 <?php // Script 12.3 - create_table.php
 
-if ($dbc = @mysqli_connect('localhost', 
-	'username', 'password', 'myblog')) {
-		$query = 'CREATE TABLE entires (
-		id 	INT UNSIGNED NOT NULL
-			AUTO_INCREMENT PRIMARY KEY, 
-		title VARCHAR(100) NOT NULL,
-		entry TEXT NOT NULL, 
-		date_entered DATETIME NOT NULL
-		) CHARACTER SET utf8' ;
+if ($dbc = @mysqli_connect('localhost', 'root', '', 'myblog')) {
+		$query = 'CREATE TABLE orders(
+id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+title VARCHAR(100) NOT NULL,
+entry TEXT NOT NULL, 
+date_entered DATETIME NOT NULL
+) CHARACTER SET utf8 ';
 		
-		if (@mysql_query($query, $dbc)) {
+		if (@mysqli_query($dbc, $query)) {
 			print '<p>The table has been 
 			created.</p>';
 		} else  {

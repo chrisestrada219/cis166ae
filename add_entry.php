@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h1>Add a blog Entry</h1>
+<h1>Add a Blog Entry</h1>
 
 <?php // Script 12.4 - add_entry.php
 
@@ -28,11 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
 	if (!$problem) {
 		$dbc = mysqli_connect
-			('localhost', 'username',
-			'password', 'myblog');
+			('localhost', 'root',
+			'', 'myblog');
 		$query = "INSERT INTO entries
-			(id, title, entry, date_
-			entered) VALUES (0, '$title',
+			(id, title, entry, date_entered) VALUES (0, '$title',
 			'$entry', NOW())";
 		
 		if (@mysqli_query($dbc, $query)) {
