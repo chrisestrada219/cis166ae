@@ -11,14 +11,19 @@
 <?php // Script 12.4 - add_entry.php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+	$dbc = mysqli_connect('localhost', 'root', '', 'myblog');
+	
+	mysqli_set_charset($dbc, 'utf8');
+
 	$problem = FALSE;
 	
 	if (!empty($_POST['title']) && 
 	!empty($_POST['entry'])) {
-		$title = trim(strip_tags
-			($_POST['title']));
-		$entry = trim(strip_tags
-			($_POST['entry']));
+		$title = mysqli_real_escape_string($dbc, 
+		trim(strip_tags($_POST['title'])));
+		$entry = mysqli_real_escape_string($dbc, 
+		trim(strip_tags($_POST['entry'])));
 	} else {
 		print '<p style="color:
 			red;">Please submit both a
@@ -27,9 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 	
 	if (!$problem) {
-		$dbc = mysqli_connect
-			('localhost', 'root',
-			'', 'myblog');
+		
 		$query = "INSERT INTO entries
 			(id, title, entry, date_entered) VALUES (0, '$title',
 			'$entry', NOW())";
@@ -45,8 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				</p><p>The query being run
 				was: ' . $query . '</p>';
 		}
-			mysqli_close($dbc);
 	} // No problem!
+	
+	mysqli_close($dbc);
+	
 } /// End of form submission IF
 	
 ?>
