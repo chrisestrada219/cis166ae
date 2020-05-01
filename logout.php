@@ -1,24 +1,15 @@
-<?php // Script 9.8 - logout.php
+<?php // Script 13.6 - logout.php
 
-session_start();
-
-$_SESSION = [];
-
-session_destroy();
+if (isset($_COOKIE['Daria'])) {
+	setcookie('Daria', FALSE, 
+	time()-300);
+}
 
 define('TITLE', 'Logout');
 include('templates/header.html');
 
+print '<p>You are now logged out.</p>';
+
+include('templates/footer.html');
+
 ?>
-
-<h2>Welcome to the J.D. Salinger
-	Fan Club!</h2>
-
-<p>You are now logged out.</p>
-
-<p>Thank you for using this site.
-	We hope that you liked it.<br />
-Blah, blah, blah...
-Blah, blah, blah...</p>
-
-<?php include('templates/footer.html'); ?>
