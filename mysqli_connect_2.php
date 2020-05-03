@@ -8,4 +8,3 @@ $dbc = mysqli_connect('localhost', 'root', '', 'myquotes');
 
 //Set the character set:
 mysqli_set_charset($dbc, 'utf8');
-
