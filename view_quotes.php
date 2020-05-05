@@ -5,9 +5,9 @@
 define('TITLE', 'View All Quotes');
 include('templates/header.html');
 
-print '<h2>All Quotes</h2>'
+print '<h2>All Quotes</h2>';
 
-//Restrict access to administrators only:
+// Restrict access to administrators only:
 if (!is_administrator()) {
 	print '<h2>Access Denied!</h2>
 	<p class="error">You do not have permission
@@ -17,11 +17,11 @@ if (!is_administrator()) {
 }
 
 // Need the database connection:
-include('../mysqli_connect.php');
+include('./mysqli_connect_2.php');
 
 // Define the query:
 $query = 'SELECT id, quote, source, favorite 
-FROM quotes ORDER BY date_entered DESC';
+FROM myquotes ORDER BY source DESC';
 
 //Run the query:
 if ($result = mysqli_query($dbc, $query)) {
@@ -40,10 +40,8 @@ if ($result = mysqli_query($dbc, $query)) {
 		
 		// Add administrative links:
 		print "<p><b>Quote Admin:</b> 
-		<a href=\"edit_quote.php?id=
-		{$row['id']}\">Edit</a> <-> 
-		<a href=\"delete_quote.php?id=
-		{$row['id']}\">Delete</a></p>
+		<a href=\"edit_quote.php?id={$row['id']}\">Edit</a> <-> 
+		<a href=\"delete_quote.php?id={$row['id']}\">Delete</a></p>
 		</div>\n";
 	
 	} // End of while loop.
