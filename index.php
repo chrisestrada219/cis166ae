@@ -1,80 +1,127 @@
-<?php // Script 13.11 - index.php
-/* This is the home page for this site. It displays:
-- The most recent quote (default)
-- OR, a random quote
-- OR, a random favorite quote */
+<?php // Home page where you add new record. 
 
-// Include the header:
+// Define a page title and include the header:
 include('templates/header.html');
+define('TITLE', 'Add A Record');
 
-// Need the database connection:
-include('./mysqli_connect_2.php');
+// This script adds a record. 
+print '<h2>Add a Record</h2>';
 
-// Define the query...
-// Change the particulars depending upon values passed in the URL:
-if (isset($_GET['random'])) {
-	
-	$query = 'SELECT id, quote, source, favorite FROM myquotes 
-	ORDER BY RAND() DESC LIMIT 1';
-
-} elseif (isset($_GET['favorite'])) {
-	
-	$query = 'SELECT id, quote, source, favorite FROM myquotes 
-	WHERE favorite=1 ORDER BY RAND() DESC LIMIT 1';
-	
-} else {
-	
-	$query = 'SELECT id, quote, 
-	source, favorite FROM myquotes
-	ORDER BY id DESC
-	LIMIT 1';
-
+// Restrict access to administrators only:
+if (!is_administrator()) {
+	print '<h2>Access Denied!</h2>
+	<p class="error">You do not have permission 
+	to access this page.</p>';
+	include('templates/footer.html');
+	exit();
 }
 
-if ($r = mysqli_query($dbc, $query)) {
+// Check for a form submission:
+if ($_SERVER['REQUEST_METHOD'] == 
+'POST') { // Handle the form,
 
-	$row = mysqli_fetch_array($r);
-	
-	print "<div><blockquote>{$row['quote']}</blockquote>- 
-		{$row['source']}";
+	if( !empty($_POST['first_name']) && 
+	!empty($_POST['last_name']) && 
+	!empty($_POST['address']) && 
+	!empty($_POST['city']) && 
+	!empty($_POST['state']) && 
+	!empty($_POST['phone_number']) && 
+	!empty($_POST['email']) ) {
 		
-	if ($row['favorite'] == 1) {
-
-	print ' <strong>Favorite!</strong>';
-
-	}
-	
-	print '</div>';
-	
-	if (is_administrator()) {
+		// Need the database connection:
+		include('./mysqli_connect.php');
 		
-		print "<p><b>Quote Admin:</b> <a href=\"edit_quote.
-			php?id={$row['id']}\">Edit</a> <->
-		<a href=\"delete_quote.php?id={$row['id']}\">Delete</a>
-		</p>\n";
+		// Prepare the values for storing:
+		$first_name = mysqli_real_escape_string($dbc, trim(strip_tags($_POST['first_name'])));
+		$last_name = mysqli_real_escape_string($dbc, trim(strip_tags($_POST['last_name'])));
+		$address = mysqli_real_escape_string($dbc, trim(strip_tags($_POST['address'])));
+		$city = mysqli_real_escape_string($dbc, trim(strip_tags($_POST['city'])));
+		$state = mysqli_real_escape_string($dbc, trim(strip_tags($_POST['state'])));
+		$phone_number = mysqli_real_escape_string($dbc, trim(strip_tags($_POST['phone_number'])));
+		$email = mysqli_real_escape_string($dbc, trim(strip_tags($_POST['email'])));
+		
+		$query = "INSERT INTO records (first_name, last_name, address, city, state, phone_number, email) 
+		VALUES ('$first_name', '$last_name', '$address', '$city', '$state', '$phone_number', 
+		'$email')";
+		mysqli_query($dbc, $query);
+		
+		if (mysqli_affected_rows($dbc) == 1) {
+			// Print a message:
+			print '<p>Your record has been 
+			stored.</p>';
+		} else {
+			print '<p class="error">Could not 
+			store the record because:<br>' . 
+			mysqli_error($dbc) . '.</p><p>The 
+			query being run was: ' . $query . 
+			'</p>';
+			
+		}
+		
+		// Close the connection:
+		mysqli_close($dbc); 
+		
+	} else { // Failed to enter a field.
+		print '<p class="error">Please fill out all fields!</p>';
+	}  
 	
-	}	
-	
-} else { // Query didn't run.
-	
-	print '<p class="error">
-		Could not retrieve the data 
-		because:<br>' . 
-		mysqli_error($dbc) . '. 
-		</p><p>The query being run 
-		was: ' . $query . '</p>';
+} // End of submitted IF.
 
-} // End of query IF.
-	
-mysqli_close($dbc);
-	
-print '<p><a href="index.php">
-	Latest</a> <-> <a href= 
-	"index.php?random=true">
-	Random</a> <-> <a href=
-	"index.php?favorite=true">
-	Favorite</a></p>';
-	
-include('templates/footer.html');	
+// Leave PHP and display the form:
 
 ?>
+
+<form action="index.php" method="post">
+	<p><label>First Name <input type="text" 
+	name="first_name"></label></p>
+	<p><label>Last Name <input type="text" 
+	name="last_name"></label></p>
+	<p><label>Address <input type="text" 
+	name="address"></label></p>
+	<p><label>City <input type="text" 
+	name="city"></label></p>
+	<p><label>State <textarea name="text"
+	rows="1" cols="1"></textarea></label></p>
+	<p><label>Phone Number <input type="text" 
+	name="phone_number"></label></p>
+	<p><label>Email Address <input type="text" 
+	name="email"></label></p>
+	<p><input type="submit" names="submit" 
+	value="Add This Record!"></p>
+</form>
+
+<?php include('templates/footer.html'); ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

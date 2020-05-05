@@ -1,4 +1,4 @@
-<?php // Script 13.6 - logout.php
+<?php // Final - logout.php
 
 if (isset($_COOKIE['Daria'])) {
 	setcookie('Daria', FALSE, 
@@ -8,7 +8,9 @@ if (isset($_COOKIE['Daria'])) {
 define('TITLE', 'Logout');
 include('templates/header.html');
 
-print '<p>You are now logged out.</p>';
+print '<p>You are now logged out.</p><br>';
+
+print '<a href="login.php">Login</a>';
 
 include('templates/footer.html');
 

@@ -1,5 +1,4 @@
-<?php // Script 13.2 - functions.php
-/* This page defines custom functions
+<?php /* This page defines custom functions
 
 This function checks if the user is an administrator, 
 takes two optional values, and returns a Boolean value. */

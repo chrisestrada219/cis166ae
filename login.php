@@ -1,4 +1,4 @@
-<?php // Script 13.5 - login.php
+<?php // Final - login.php
 
 $loggedin = false;
 $error = false;

@@ -1,28 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Connect to MySQL</title>
-</head>
-<body>
+<?php /* This script connects to the database and establishes the
+character set for communications. */
 
-<?php // Script 12.1 - mysqli_connect.php
+// Connect:
 
-if ($dbc = @mysqli_connect('localhost', 'myblog')) {
-		
-	print '<p>Successfully connected to 
-		the database!</p>';
-		
-	mysqli_close($dbc);
-	
-} else {
+$dbc = mysqli_connect('localhost', 'root', '', 'final');
 
-	print '<p style="color:red;">Could not 
-		connect to MySQL:<br>' . mysqli_connect_error() . '.</p>';
-		
-	} 
-
-?>
-
-</body>
-</html>
+//Set the character set:
+mysqli_set_charset($dbc, 'utf8');
